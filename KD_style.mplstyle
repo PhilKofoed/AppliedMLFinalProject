@@ -1,0 +1,84 @@
+# To check more avaialble options see:
+# https://matplotlib.org/tutorials/introductory/customizing.html
+
+text.color :    (0.1,0.1,0.1)
+
+####################
+# AXES
+####################
+axes.titlesize :        16
+axes.labelsize :        14
+axes.edgecolor :        (0.1,0.1,0.1) #Normalized RGB colours (from 0 to 1 instead of 0 to 255)
+axes.labelcolor :       (0.1,0.1,0.1)
+axes.linewidth :        1
+axes.spines.top :       True
+axes.spines.right :     True
+axes.spines.bottom :    True
+axes.spines.left :      True
+
+####################
+# GRID
+####################
+axes.grid : True
+grid.alpha :        0.35
+grid.linestyle :    --
+grid.linewidth :    0.5
+grid.color:         'black'
+
+####################
+# LINES
+####################
+# Casper colours
+# axes.prop_cycle :     cycler('color', [ 'b24da7', '554db2', '4db2ab', '54b24d', 'b24d4d']) #hex colours
+# My colours
+axes.prop_cycle :       cycler('color', [ 'd92323', '234fd9', '3dd923', 'd97423', 'a723d9', '23c0d9', 'b5d923', 'd92382',]) #hex colours
+lines.linewidth :       2
+lines.markeredgewidth : 0.0
+
+####################
+# SCATTER PLOT
+####################
+scatter.marker : .
+
+####################
+# TICKS
+####################
+xtick.labelsize :   12
+xtick.color :       (0.1,0.1,0.1)
+xtick.direction :   in
+xtick.major.size :  10
+xtick.minor.size :  6
+xtick.minor.visible: True
+
+ytick.labelsize :    12
+ytick.color :       (0.1,0.1,0.1)
+ytick.direction :   in
+ytick.major.size :  10
+ytick.minor.size :  6
+ytick.minor.visible: True
+
+####################
+# LEGEND
+####################
+legend.loc:           best
+legend.frameon:       True     
+legend.framealpha:    1      
+legend.facecolor:     inherit  
+legend.edgecolor:     (0.1,0.1,0.1) 
+legend.fancybox:      False
+legend.borderaxespad: 0
+
+legend.handlelength:  2
+legend.handletextpad: 0.5
+legend.markerscale:   1.5   
+legend.fontsize:      12
+#legend.labelcolor:    None
+legend.title_fontsize: 14
+
+####################
+# FIGURE OUTPUT 
+####################
+figure.figsize  :   7, 5
+figure.dpi :        80
+figure.facecolor :  (0.92, 0.92, 0.92)
+savefig.dpi :       200
