@@ -62,7 +62,8 @@ df_match_with_outcome = pd.concat([df_match_small, create_outcome(df_match_small
 print(np.unique(df_match_with_outcome["stage"]))
 # %%
 def running_score(df):
-    
+    def form_messure1(df):
+        pass
     leagues = np.unique(df["league_id"])
     seasons = np.unique(df["season"])
     for league in leagues[:1]:
@@ -72,27 +73,40 @@ def running_score(df):
             temp = df[np.logical_and(df["league_id"] == league, df["season"] == season)]
 
             teams = np.unique(temp["home_team_api_id"])
-            display(temp)
-            for team in teams[:1]:
-                print(df_team["team_long_name"][df_team["team_api_id"] == team].values[0])
+            team_stats = {}
+            for team in teams:
+                # print(df_team["team_long_name"][df_team["team_api_id"] == team].values[0])
                 outcomes_home = temp[temp["home_team_api_id"] == team][["date", "match_api_id", "home_team_win", "draw", "away_team_win",'home_team_goal', 'away_team_goal']]
                 outcomes_away = temp[temp["away_team_api_id"] == team][["date", "match_api_id", "away_team_win", "draw", "home_team_win", 'away_team_goal', 'home_team_goal']]
                 outcomes_home.columns = ["date", "match_api_id", "W", "D", "L", "GF", "GA"]
                 outcomes_away.columns = ["date", "match_api_id", "W", "D", "L", "GF", "GA"]
-                outcomes = pd.concat([outcomes_home, outcomes_away]).sort_values("date")
+                outcomes_unaltered = pd.concat([outcomes_home, outcomes_away]).sort_values("date")
+                outcomes = outcomes_unaltered.copy()
                 outcomes.iloc[:,2:] = np.cumsum(outcomes.iloc[:,2:])
-                stats = {}
+                stats = {}  
                 stats["GD"] = outcomes["GF"]-outcomes["GA"]
-                pld = np.sum(outcomes.iloc[:,2:5], axis = 1)
-                stats["GFpm"] = outcomes["GF"]/pld
-                stats["GApm"] = outcomes["GA"]/pld
-                stats["GDpm"] = outcomes["GD"]/pld
-                stats["Form_messure1"]
-                # stats["Form_messure2"]
-                # stats["Form_messure3"]
-                # stats["Form_messure4"]
-                pts = outcomes.iloc[:,2:5].values@np.array([3,1,0])
-                print(pd.concat([outcomes, pd.DataFrame(stats)], axis = 1))
+                stats["pld"] = np.sum(outcomes.iloc[:,2:5], axis = 1)
+                stats["pts"] = outcomes.iloc[:,2:5].values@np.array([3,1,0])
+
+                stats["GFpm"] = outcomes["GF"]/stats["pld"]
+                stats["GApm"] = outcomes["GA"]/stats["pld"]
+                stats["GDpm"] = stats["GD"]/stats["pld"]
+                stats["ptspm"] = stats["pts"]/stats["pld"]
+                
+                # Stats are for after the game and not before. 1 is a win, 0.5 is a draw and 0 is a lose and -1 if unknown
+                stats["-1 match"] = outcomes_unaltered.iloc[:,2:5].values@np.array([1,0.5,0])
+                stats["-2 match"] = np.append(np.array([-1 for i in range(1)]), outcomes_unaltered.iloc[:-1,2:5].values@np.array([1,0.5,0]))
+                stats["-3 match"] = np.append(np.array([-1 for i in range(2)]), outcomes_unaltered.iloc[:-2,2:5].values@np.array([1,0.5,0]))
+                stats["-4 match"] = np.append(np.array([-1 for i in range(3)]), outcomes_unaltered.iloc[:-3,2:5].values@np.array([1,0.5,0]))
+                stats["-5 match"] = np.append(np.array([-1 for i in range(4)]), outcomes_unaltered.iloc[:-4,2:5].values@np.array([1,0.5,0]))
+                outcomes = pd.concat([outcomes, pd.DataFrame(stats)], axis = 1)
+                first_match_zero_data = np.array([0 for i in outcomes.keys()-2])
+                first_match_zero_data[-5:] = np.array([-1 for i in range(5)])
+                print(first_match_zero_data)
+                outcomes = pd.concat([outcomes[:2], ])
+                team_stats[team] = outcomes
+                # More stats can be included if needed
+            
 
 
             # Look for incomplete data
