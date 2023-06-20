@@ -1,0 +1,64 @@
+# To check more avaialble options see:
+# https://matplotlib.org/tutorials/introductory/customizing.html
+
+text.color : (0,0,0)
+
+# AXES
+axes.titlesize : 16
+axes.labelsize : 14
+axes.edgecolor : (0,0,0) #Normalized RGB colours (from 0 to 1 instead of 0 to 255)
+axes.labelcolor : (0,0,0)
+axes.linewidth : 1.5
+axes.spines.top : True
+axes.spines.right : True
+axes.spines.bottom : True
+axes.spines.left : True                                   
+
+
+# GRID
+axes.grid : True
+grid.alpha : 0.7
+grid.linestyle : --
+grid.linewidth : 0.6
+grid.color: 'black'
+
+# LINES
+axes.prop_cycle : cycler('color', ['fd7f6f','7eb0d5', 'b2e061', 'bd7ebe', 'ffb55a','ffee65','beb9db','fdcce5','8bd3c7']) #hex colours
+lines.linewidth : 2
+lines.markeredgewidth : 0.0
+
+# SCATTER PLOT
+scatter.marker : .
+
+# TICKS
+xtick.labelsize : 13
+xtick.color : (0.2,0.2,0.2)
+xtick.direction : in
+xtick.major.size :  10
+xtick.minor.size :  6
+xtick.minor.visible: True
+ytick.labelsize : 13
+ytick.color : (0.2,0.2,0.2)
+ytick.direction : in
+ytick.major.size :  10
+ytick.minor.size :  6
+ytick.minor.visible: True
+
+# FIGURE OUTPUT 
+figure.figsize  : 8, 5
+figure.dpi : 150
+savefig.dpi : 200
+
+# FIGURE
+figure.edgecolor:   black     # figure edgecolor
+figure.frameon:     True      # enable figure frame
+figure.facecolor:   white     # figure facecolor
+
+# LEGEND
+legend.loc:           best
+legend.frameon:       True     # if True, draw the legend on a background patch
+legend.framealpha:    0.8      # legend patch transparency
+legend.facecolor:     inherit  # inherit from axes.facecolor; or color spec
+legend.edgecolor:     0.8      # background patch boundary color
+legend.fancybox:      True     # if True, use a rounded box for the
+                                # legend background, else a rectangle
