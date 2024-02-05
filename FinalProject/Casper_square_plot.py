@@ -186,7 +186,7 @@ ax.xaxis.set_label_position('top')
 cbar.ax.set_title(label='ROI', size = 14)
 ax.yaxis.set_label_coords(-0.17,0.98)
 plt.tight_layout()
-# plt.savefig("Naive_roi_v1.png", dpi = 400)
+plt.savefig("Naive_roi_v1.png", dpi = 400)
 print(df_match.shape)
 
 
